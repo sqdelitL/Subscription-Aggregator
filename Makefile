@@ -1,17 +1,22 @@
-.PHONY: run run-migrate migrate-up migrate-down migrate-new
+.PHONY: build run run-migrate migrate-up migrate-down migrate-new
+
+build:
+	docker compose build
 
 run:
-	docker compose up --build
+	docker compose up -d db app
 
 run-migrate:
-	docker compose run --rm --build --service-ports app ./main-app -migrate
+	docker compose up -d db && docker compose up migrate && docker compose up -d app
 
 migrate-up:
-	docker compose build app
-	docker compose run --rm app ./migrate-tool up
+	docker compose run --rm migrate /app/migrate-tool up
 
 migrate-down:
-	docker compose build app
-	docker compose run --rm app ./migrate-tool down
+	docker compose run --rm migrate /app/migrate-tool down
 
 migrate-new:
+ifndef name
+	$(error Usage: make migrate-new name=migration_name)
+endif
+	docker compose run --rm migrate /app/migrate-tool new $(name)

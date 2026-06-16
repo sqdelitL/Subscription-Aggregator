@@ -7,7 +7,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./internal/config/config.yaml:/config.yaml
+      - ./config.yaml:/config.yaml
     depends_on:
       db:
         condition: service_healthy
@@ -30,6 +30,20 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    networks:
+      - internal
+
+  migrate:
+    build: .
+    command: ./migrate-tool up
+    env_file:
+      - .env
+    volumes:
+      - ./config.yaml:/config.yaml
+      - ./internal/db/migration/sql:/app/internal/db/migration/sql
+    depends_on:
+      db:
+        condition: service_healthy
     networks:
       - internal
 
