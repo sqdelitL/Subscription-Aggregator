@@ -1,0 +1,9 @@
+data_base:
+  retry:
+    retry_delay_seconds: 2
+    max_retries: 5
+    backoff_multiplier_seconds: 1.5
+    max_interval_seconds: 200
+  max_idle_conns: 50
+  max_open_conns: 120
+  conn_max_lifetime: 3000
