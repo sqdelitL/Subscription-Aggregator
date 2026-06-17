@@ -39,6 +39,6 @@ func UpdateHandler(subscribeInteractor *subscribe.Interactor) http.HandlerFunc {
 			return
 		}
 
-		response.SuccessResponse(w, nil, http.StatusOK)
+		response.SuccessResponse(w, map[interface{}]interface{}{}, http.StatusOK)
 	}
 }

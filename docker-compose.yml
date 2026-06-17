@@ -1,6 +1,8 @@
 services:
   app:
-    build: .
+    build:
+      context: .
+    image: subscription-aggregator:latest
     container_name: subscription-aggregator
     ports:
       - "8080:8080"
@@ -34,7 +36,9 @@ services:
       - internal
 
   migrate:
-    build: .
+    build:
+      context: .
+    image: subscription-aggregator:latest
     command: ./migrate-tool up
     env_file:
       - .env

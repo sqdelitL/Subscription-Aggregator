@@ -47,7 +47,6 @@ func (s *SubscriptionWriterImpl) Update(ctx context.Context, sub *subscribe.Subs
 		    end_date = $5
 		WHERE id = $6
 	`
-	
 	result, err := s.db.ExecContext(ctx, query,
 		sub.UserID,
 		sub.ServiceName,
@@ -65,7 +64,7 @@ func (s *SubscriptionWriterImpl) Update(ctx context.Context, sub *subscribe.Subs
 		return err
 	}
 	if rows == 0 {
-		return errs.NotFoundSubscribeError
+		return fmt.Errorf("not found subscribe with id %d. %w", sub.ID, errs.NotFoundSubscribeError)
 	}
 	return nil
 }

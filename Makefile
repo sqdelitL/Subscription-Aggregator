@@ -7,7 +7,9 @@ run:
 	docker compose up -d db app
 
 run-migrate:
-	docker compose up -d db && docker compose up migrate && docker compose up -d app
+	docker compose up -d db
+	docker compose run --rm migrate
+	docker compose up -d app
 
 migrate-up:
 	docker compose run --rm migrate /app/migrate-tool up

@@ -14,6 +14,10 @@ func toDomain(sub *Subscribe) (*domain.Subscribe, error) {
 	if sub == nil {
 		return nil, fmt.Errorf("subscribe is nil. %w", errs.JsonValidationError)
 	}
+	var id uint64
+	if sub.ID != 0 {
+		id = sub.ID
+	}
 
 	userID, err := uuid.Parse(sub.UserID)
 	if err != nil {
@@ -35,6 +39,7 @@ func toDomain(sub *Subscribe) (*domain.Subscribe, error) {
 	}
 
 	return &domain.Subscribe{
+		ID:          id,
 		UserID:      userID,
 		ServiceName: sub.ServiceName,
 		Price:       sub.Price,
