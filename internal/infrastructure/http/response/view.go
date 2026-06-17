@@ -29,7 +29,11 @@ func FailResponse(w http.ResponseWriter, err error, handlerName string) {
 	if err == nil {
 		slog.Error("FailResponse called with nil error", "handler", handlerName)
 		w.WriteHeader(http.StatusInternalServerError)
-		json.NewEncoder(w).Encode(FailView{Error: "internal server error"})
+		err = json.NewEncoder(w).Encode(FailView{Error: "internal server error"})
+		if err != nil {
+			slog.Error("failed to encode fail response: %v", "err", err)
+			return
+		}
 		return
 	}
 

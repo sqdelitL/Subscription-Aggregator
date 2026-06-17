@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"log/slog"
 
-	"github.com/sqdelitL/subscription-aggregator/internal/domain/port/respository"
+	"github.com/sqdelitL/subscription-aggregator/internal/domain/port/repository"
 	"github.com/sqdelitL/subscription-aggregator/internal/infrastructure/config"
 	database "github.com/sqdelitL/subscription-aggregator/internal/infrastructure/db"
 	repoimpl "github.com/sqdelitL/subscription-aggregator/internal/infrastructure/db/repository/subscribe"
@@ -15,8 +15,8 @@ import (
 
 type App struct {
 	db                  *sql.DB
-	subscribeWriterRepo respository.SubscriptionWriter
-	subscribeReaderRepo respository.SubscriptionReader
+	subscribeWriterRepo repository.SubscriptionWriter
+	subscribeReaderRepo repository.SubscriptionReader
 	subscribeInteractor *subscribe.Interactor
 	server              *http.Server
 }

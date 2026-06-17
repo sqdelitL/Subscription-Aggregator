@@ -42,7 +42,7 @@ func GetHandler(subscribeInteractor *subscribe.Interactor) http.HandlerFunc {
 
 		dto, err := fromDomain(sub)
 		if err != nil {
-			response.FailResponse(w, err, createHandlerName)
+			response.FailResponse(w, err, getHandlerName)
 			return
 		}
 

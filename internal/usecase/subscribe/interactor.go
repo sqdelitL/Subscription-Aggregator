@@ -4,16 +4,16 @@ import (
 	"context"
 	"time"
 
-	"github.com/sqdelitL/subscription-aggregator/internal/domain/port/respository"
+	"github.com/sqdelitL/subscription-aggregator/internal/domain/port/repository"
 	"github.com/sqdelitL/subscription-aggregator/internal/domain/subscribe"
 )
 
 type Interactor struct {
-	writer respository.SubscriptionWriter
-	reader respository.SubscriptionReader
+	writer repository.SubscriptionWriter
+	reader repository.SubscriptionReader
 }
 
-func New(writer respository.SubscriptionWriter, reader respository.SubscriptionReader) *Interactor {
+func New(writer repository.SubscriptionWriter, reader repository.SubscriptionReader) *Interactor {
 	return &Interactor{writer: writer, reader: reader}
 }
 
@@ -44,7 +44,7 @@ func (i *Interactor) List(ctx context.Context) ([]subscribe.Subscribe, error) {
 	return i.reader.GetAll(ctx)
 }
 
-func (i *Interactor) GetTotalCost(ctx context.Context, filter respository.CostFilter) (int64, error) {
+func (i *Interactor) GetTotalCost(ctx context.Context, filter repository.CostFilter) (int64, error) {
 	subs, err := i.reader.FindSubscriptions(ctx, filter)
 	if err != nil {
 		return 0, err

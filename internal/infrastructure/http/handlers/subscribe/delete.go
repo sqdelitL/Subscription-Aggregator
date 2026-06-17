@@ -30,13 +30,13 @@ func DeleteHandler(subscribeInteractor *subscribe.Interactor) http.HandlerFunc {
 		paramID := chi.URLParam(r, "id")
 		id, err := strconv.Atoi(paramID)
 		if err != nil {
-			response.FailResponse(w, fmt.Errorf("sub id parse error. %v. %w", err, errs.JsonValidationError), getHandlerName)
+			response.FailResponse(w, fmt.Errorf("sub id parse error. %v. %w", err, errs.JsonValidationError), deleteHandlerName)
 			return
 		}
 
 		err = subscribeInteractor.Delete(ctx, uint64(id))
 		if err != nil {
-			response.FailResponse(w, err, getHandlerName)
+			response.FailResponse(w, err, deleteHandlerName)
 			return
 		}
 

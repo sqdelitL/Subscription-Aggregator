@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/sqdelitL/subscription-aggregator/internal/domain/port/respository"
+	"github.com/sqdelitL/subscription-aggregator/internal/domain/port/repository"
 	"github.com/sqdelitL/subscription-aggregator/internal/errs"
 	"github.com/sqdelitL/subscription-aggregator/internal/infrastructure/http/response"
 	"github.com/sqdelitL/subscription-aggregator/internal/infrastructure/util"
@@ -71,7 +71,7 @@ func GetCostHandler(subscribeInteractor *subscribe.Interactor) http.HandlerFunc 
 			serviceName = &serviceNameParam
 		}
 
-		subs, err := subscribeInteractor.GetTotalCost(ctx, respository.CostFilter{
+		subs, err := subscribeInteractor.GetTotalCost(ctx, repository.CostFilter{
 			UserID:      userID,
 			Start:       start,
 			End:         end,

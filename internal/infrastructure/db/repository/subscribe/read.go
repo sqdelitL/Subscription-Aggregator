@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/sqdelitL/subscription-aggregator/internal/domain/port/respository"
+	"github.com/sqdelitL/subscription-aggregator/internal/domain/port/repository"
 	"github.com/sqdelitL/subscription-aggregator/internal/domain/subscribe"
 	"github.com/sqdelitL/subscription-aggregator/internal/errs"
 )
@@ -64,7 +64,7 @@ func (s *SubscriptionReaderImpl) GetAll(ctx context.Context) ([]subscribe.Subscr
 	return subs, nil
 }
 
-func (s *SubscriptionReaderImpl) FindSubscriptions(ctx context.Context, filter respository.CostFilter) ([]subscribe.Subscribe, error) {
+func (s *SubscriptionReaderImpl) FindSubscriptions(ctx context.Context, filter repository.CostFilter) ([]subscribe.Subscribe, error) {
 	start := filter.Start
 
 	var endParam time.Time

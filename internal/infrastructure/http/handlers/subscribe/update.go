@@ -29,25 +29,25 @@ func UpdateHandler(subscribeInteractor *subscribe.Interactor) http.HandlerFunc {
 		ctx := r.Context()
 		var request Subscribe
 		if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
-			response.FailResponse(w, fmt.Errorf("decode subscribe error. %v, %w", err, errs.JsonValidationError), createHandlerName)
+			response.FailResponse(w, fmt.Errorf("decode subscribe error. %v, %w", err, errs.JsonValidationError), updateHandlerName)
 			return
 		}
 
 		err := request.ValidateUpdate()
 		if err != nil {
-			response.FailResponse(w, err, createHandlerName)
+			response.FailResponse(w, err, updateHandlerName)
 			return
 		}
 
 		domain, err := toDomain(&request)
 		if err != nil {
-			response.FailResponse(w, err, createHandlerName)
+			response.FailResponse(w, err, updateHandlerName)
 			return
 		}
 
 		err = subscribeInteractor.Update(ctx, domain)
 		if err != nil {
-			response.FailResponse(w, err, createHandlerName)
+			response.FailResponse(w, err, updateHandlerName)
 			return
 		}
 
