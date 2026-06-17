@@ -205,6 +205,8 @@ GET /subscriptions/total-cost
 * `error`
 
 ---
+**Swagger API:** http://localhost:8080/swagger/index.html
+
 
 ## Линтер
 
