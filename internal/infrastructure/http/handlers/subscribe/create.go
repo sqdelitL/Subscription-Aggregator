@@ -12,6 +12,17 @@ import (
 
 const createHandlerName = "CreateSubscribe"
 
+// CreateHandler создаёт новую подписку.
+// @Summary      Создание подписки
+// @Description  Создаёт запись о подписке пользователя.
+// @Tags         subscriptions
+// @Accept       json
+// @Produce      json
+// @Param        request body Subscribe true "Параметры подписки"
+// @Success      201  {object}  object "ID созданной подписки"
+// @Failure      400  {object}  response.FailView
+// @Failure      500  {object}  response.FailView
+// @Router       /subscriptions [post]
 func CreateHandler(subscribeInteractor *subscribe.Interactor) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()

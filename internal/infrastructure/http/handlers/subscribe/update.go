@@ -12,6 +12,18 @@ import (
 
 const updateHandlerName = "UpdateSubscribe"
 
+// UpdateHandler обновляет существующую подписку.
+// @Summary      Обновление подписки
+// @Description  Полностью заменяет данные подписки.
+// @Tags         subscriptions
+// @Accept       json
+// @Produce      json
+// @Param        request body Subscribe true "Параметры подписки (ID обязателен)"
+// @Success      200  {object}  object "Пустой ответ"
+// @Failure      400  {object}  response.FailView
+// @Failure      404  {object}  response.FailView
+// @Failure      500  {object}  response.FailView
+// @Router       /subscriptions [put]
 func UpdateHandler(subscribeInteractor *subscribe.Interactor) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()

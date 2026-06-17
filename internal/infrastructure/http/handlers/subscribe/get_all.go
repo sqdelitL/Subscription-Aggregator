@@ -9,6 +9,14 @@ import (
 
 const getAllHandlerName = "GetAllHandler"
 
+// GetAllHandler возвращает список всех подписок.
+// @Summary      Список подписок
+// @Description  Возвращает все существующие записи о подписках.
+// @Tags         subscriptions
+// @Produce      json
+// @Success      200  {array}   Subscribe
+// @Failure      500  {object}  response.FailView
+// @Router       /subscriptions [get]
 func GetAllHandler(subscribeInteractor *subscribe.Interactor) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()

@@ -1,0 +1,212 @@
+basePath: /
+definitions:
+  internal_infrastructure_http_handlers_subscribe.Subscribe:
+    properties:
+      end_date:
+        type: string
+      id:
+        type: integer
+      price:
+        type: integer
+      service_name:
+        type: string
+      start_date:
+        type: string
+      user_id:
+        type: string
+    type: object
+  response.FailView:
+    properties:
+      error:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: REST-сервис для агрегации данных об онлайн подписках пользователей.
+  title: Subscription Aggregator API
+  version: "1.0"
+paths:
+  /subscriptions:
+    get:
+      description: Возвращает все существующие записи о подписках.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/internal_infrastructure_http_handlers_subscribe.Subscribe'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.FailView'
+      summary: Список подписок
+      tags:
+      - subscriptions
+    post:
+      consumes:
+      - application/json
+      description: Создаёт запись о подписке пользователя.
+      parameters:
+      - description: Параметры подписки
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_infrastructure_http_handlers_subscribe.Subscribe'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: ID созданной подписки
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.FailView'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.FailView'
+      summary: Создание подписки
+      tags:
+      - subscriptions
+    put:
+      consumes:
+      - application/json
+      description: Полностью заменяет данные подписки.
+      parameters:
+      - description: Параметры подписки (ID обязателен)
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/internal_infrastructure_http_handlers_subscribe.Subscribe'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Пустой ответ
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.FailView'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.FailView'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.FailView'
+      summary: Обновление подписки
+      tags:
+      - subscriptions
+  /subscriptions/{id}:
+    delete:
+      description: Удаляет запись о подписке.
+      parameters:
+      - description: ID подписки
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Пустой ответ
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.FailView'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.FailView'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.FailView'
+      summary: Удаление подписки
+      tags:
+      - subscriptions
+    get:
+      description: Возвращает запись о подписке по её идентификатору.
+      parameters:
+      - description: ID подписки
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/internal_infrastructure_http_handlers_subscribe.Subscribe'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.FailView'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.FailView'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.FailView'
+      summary: Получение подписки
+      tags:
+      - subscriptions
+  /subscriptions/cost:
+    get:
+      description: Вычисляет общую стоимость всех подписок за указанный период с возможной
+        фильтрацией по пользователю и/или сервису.
+      parameters:
+      - description: Начало периода (MM-YYYY)
+        in: query
+        name: start_date
+        required: true
+        type: string
+      - description: Конец периода (MM-YYYY), если не указан – период открытый
+        in: query
+        name: end_date
+        type: string
+      - description: ID пользователя (UUID)
+        in: query
+        name: user_id
+        type: string
+      - description: Название сервиса
+        in: query
+        name: service_name
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Итоговая сумма
+          schema:
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.FailView'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.FailView'
+      summary: Суммарная стоимость подписок
+      tags:
+      - subscriptions
+swagger: "2.0"

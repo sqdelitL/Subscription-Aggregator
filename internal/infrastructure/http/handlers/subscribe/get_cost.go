@@ -15,6 +15,19 @@ import (
 
 const getCostHandlerName = "GetCostHandler"
 
+// GetCostHandler подсчитывает суммарную стоимость подписок за период.
+// @Summary      Суммарная стоимость подписок
+// @Description  Вычисляет общую стоимость всех подписок за указанный период с возможной фильтрацией по пользователю и/или сервису.
+// @Tags         subscriptions
+// @Produce      json
+// @Param        start_date   query     string  true   "Начало периода (MM-YYYY)"
+// @Param        end_date     query     string  false  "Конец периода (MM-YYYY), если не указан – период открытый"
+// @Param        user_id      query     string  false  "ID пользователя (UUID)"
+// @Param        service_name query     string  false  "Название сервиса"
+// @Success      200  {object}  object "Итоговая сумма"
+// @Failure      400  {object}  response.FailView
+// @Failure      500  {object}  response.FailView
+// @Router       /subscriptions/cost [get]
 func GetCostHandler(subscribeInteractor *subscribe.Interactor) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()

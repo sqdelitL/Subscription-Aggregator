@@ -13,6 +13,17 @@ import (
 
 const getHandlerName = "GetSubscribe"
 
+// GetHandler возвращает одну подписку по ID.
+// @Summary      Получение подписки
+// @Description  Возвращает запись о подписке по её идентификатору.
+// @Tags         subscriptions
+// @Produce      json
+// @Param        id   path      int  true  "ID подписки"
+// @Success      200  {object}  Subscribe
+// @Failure      400  {object}  response.FailView
+// @Failure      404  {object}  response.FailView
+// @Failure      500  {object}  response.FailView
+// @Router       /subscriptions/{id} [get]
 func GetHandler(subscribeInteractor *subscribe.Interactor) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
