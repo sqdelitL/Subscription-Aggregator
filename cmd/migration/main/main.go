@@ -6,8 +6,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/sqdelitL/subscription-aggregator/internal/config"
-	"github.com/sqdelitL/subscription-aggregator/internal/db/migration"
+	"github.com/sqdelitL/subscription-aggregator/internal/infrastructure/config"
+	"github.com/sqdelitL/subscription-aggregator/internal/infrastructure/db/migration"
 )
 
 func main() {

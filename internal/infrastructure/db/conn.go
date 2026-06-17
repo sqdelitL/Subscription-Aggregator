@@ -9,7 +9,7 @@ import (
 
 	"github.com/cenkalti/backoff/v4"
 	_ "github.com/lib/pq"
-	"github.com/sqdelitL/subscription-aggregator/internal/config"
+	"github.com/sqdelitL/subscription-aggregator/internal/infrastructure/config"
 )
 
 const driver = "postgres"

@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/sqdelitL/subscription-aggregator/internal/config"
+	"github.com/sqdelitL/subscription-aggregator/internal/infrastructure/config"
 )
 
 func main() {

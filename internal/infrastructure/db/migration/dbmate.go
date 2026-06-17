@@ -12,10 +12,10 @@ import (
 	"github.com/amacneil/dbmate/v2/pkg/dbmate"
 	"github.com/amacneil/dbmate/v2/pkg/dbutil"
 	_ "github.com/amacneil/dbmate/v2/pkg/driver/postgres"
-	"github.com/sqdelitL/subscription-aggregator/internal/config"
+	"github.com/sqdelitL/subscription-aggregator/internal/infrastructure/config"
 )
 
-const migrationsDir = "internal/db/migration/sql"
+const migrationsDir = "internal/infrastructure/db/migration/sql"
 
 //go:embed sql
 var migrationsFS embed.FS

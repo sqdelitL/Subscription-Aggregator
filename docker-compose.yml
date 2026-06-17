@@ -40,7 +40,7 @@ services:
       - .env
     volumes:
       - ./config.yaml:/config.yaml
-      - ./internal/db/migration/sql:/app/internal/db/migration/sql
+      - ./internal/infrastructure/db/migration/sql:/app/internal/infrastructure/db/migration/sql
     depends_on:
       db:
         condition: service_healthy
