@@ -26,6 +26,9 @@ type Config struct {
 		MaxOpenConns    int `yaml:"max_open_conns"`
 		ConnMaxLifetime int `yaml:"conn_max_lifetime"`
 	} `yaml:"data_base"`
+
+	ServerPort string `yaml:"server_port"`
+	LogLevel   string `yaml:"log_level"`
 }
 
 func New() (*Config, error) {

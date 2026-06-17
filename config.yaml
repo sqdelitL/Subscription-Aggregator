@@ -7,3 +7,6 @@ data_base:
   max_idle_conns: 50
   max_open_conns: 120
   conn_max_lifetime: 3000
+
+server_port: 8080
+log_level: debug

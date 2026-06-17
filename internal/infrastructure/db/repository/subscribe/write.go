@@ -3,6 +3,7 @@ package subscribe
 import (
 	"context"
 	"database/sql"
+	"fmt"
 
 	"github.com/sqdelitL/subscription-aggregator/internal/domain/subscribe"
 	"github.com/sqdelitL/subscription-aggregator/internal/errs"
@@ -12,7 +13,7 @@ type SubscriptionWriterImpl struct {
 	db *sql.DB
 }
 
-func NewSubscriptionWriterImpl(db *sql.DB) *SubscriptionWriterImpl {
+func NewSubscriptionWriter(db *sql.DB) *SubscriptionWriterImpl {
 	return &SubscriptionWriterImpl{db: db}
 }
 
@@ -46,6 +47,7 @@ func (s *SubscriptionWriterImpl) Update(ctx context.Context, sub *subscribe.Subs
 		    end_date = $5
 		WHERE id = $6
 	`
+	
 	result, err := s.db.ExecContext(ctx, query,
 		sub.UserID,
 		sub.ServiceName,
